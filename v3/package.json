@@ -1,0 +1,9 @@
+{
+  "name": "@viettel-s3/v3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/duypv98/viettel-s3.git",
+  "author": "duypv",
+  "license": "UNLICENSED",
+  "private": false
+}
