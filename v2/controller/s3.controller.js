@@ -13,14 +13,16 @@ module.exports = {
     if (!file) {
       throw new BadRequestError({ data: 'No Such File!' });
     }
+    const baseFolder = req.query.base_folder;
     const bucket = req.query.bucket;
+    if (!bucket) throw new BadRequestError({ data: 'No Such Bucket' });
     const time = new Date();
     const y = time.getFullYear();
     const m = time.getMonth() + 1;
     const d = time.getDate();
-    const Key = `${bucket}/${y}/${m}/${d}/${file.originalname}`;
+    const Key = `${baseFolder ? `${baseFolder}/` : ''}${y}/${m}/${d}/${file.originalname}`;
     const data = await vtS3.putObject({
-      Bucket: vtS3Bucket,
+      Bucket: bucket,
       Body: file.buffer,
       ServerSideEncryption: "AES256",
       Key,

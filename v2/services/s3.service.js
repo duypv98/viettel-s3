@@ -14,22 +14,37 @@ const Bucket = vtEndpointHost.split('.')[0];
 const Endpoint = vtEndpointHost.split('.').slice(1).join('.');
 
 console.log({
+  vtEndpoint,
   scheme,
   vtEndpointHost,
   Bucket
 })
 
 const vtS3 = new S3({
-  endpoint: `${scheme}://${Endpoint}`,
+  endpoint: vtEndpoint,
   apiVersion: "2006-03-01",
   credentials: {
     accessKeyId: vtS3AccessKeyId,
     secretAccessKey: vtS3AccessKeySecret
-  }
+  },
+  // This democode will raise Error if no `sslEnabled, s3ForcePathStyle: true`
+  sslEnabled: false,
+  s3ForcePathStyle: true
 })
+
+// const vtS3 = new S3({
+//   endpoint: `${scheme}://${Endpoint}`,
+//   apiVersion: "2006-03-01",
+//   credentials: {
+//     accessKeyId: vtS3AccessKeyId,
+//     secretAccessKey: vtS3AccessKeySecret
+//   }
+// })
 
 module.exports = {
   vtS3,
-  vtS3Bucket: Bucket,
+  // Example 
+  vtS3Bucket,
+  // vtS3Bucket: Bucket,
   vtEndpoint
 }
