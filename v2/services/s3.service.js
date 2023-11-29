@@ -27,11 +27,13 @@ const vtS3 = new S3({
     accessKeyId: vtS3AccessKeyId,
     secretAccessKey: vtS3AccessKeySecret
   },
-  // This democode will raise Error if no `sslEnabled, s3ForcePathStyle: true`
-  sslEnabled: false,
+  // This code will raise Error if no specifying `s3ForcePathStyle: true`
+  // sslEnabled: false,
   s3ForcePathStyle: true
 })
 
+
+// Bellow Code will work without specifying `s3ForcePathStyle`
 // const vtS3 = new S3({
 //   endpoint: `${scheme}://${Endpoint}`,
 //   apiVersion: "2006-03-01",
@@ -43,8 +45,6 @@ const vtS3 = new S3({
 
 module.exports = {
   vtS3,
-  // Example 
-  vtS3Bucket,
-  // vtS3Bucket: Bucket,
+  vtS3Bucket: Bucket,
   vtEndpoint
 }
